@@ -1,102 +1,289 @@
-<header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png" id="logo">
-         <input type="text" placeholder="search"/>    
-         <nav>
-            <i class='fas fa-home'></i>
-            <i class='far fa-paper-plane'></i>
-            <i class='far fa-compass'></i>
-            <i class='far fa-heart'></i>
-            <div id="user">
-                <img id="pic" src="https://images.unsplash.com/profile-fb-1535725706-502eab0fee8e.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128"/>
-            </div>
-        </nav>
-    </header>
-      <main>
-        <div class="preview">
-          <div id="user-name">__fibo_freak <i class='fas fa-angle-down'></i></div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/564x/af/d1/12/afd1126225d818c7c5058e11b4b260c3.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">chloe</span>
-              <span id="msg">I picked up some kambucha..</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/77/41/89/7741893db63e83fdc1d2b4437f63c68b.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">kenzo</span>
-              <span id="msg">call me when your free</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/c3/ea/10/c3ea105f7fb929fe865b37357fab0084.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">nikita</span>
-              <span id="msg">hey did you message your..</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/6f/0f/92/6f0f921e55c5cfb20e9b6e1c00d88c0e.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">betty_spaghetti</span>
-              <span id="msg">Let's go out this weekend!</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/fb/46/ef/fb46ef3c690f10321ebe6f85df9ea93f.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">nunchuck</span>
-              <span id="msg">I just finished watching peak..</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/1b/d5/c1/1bd5c166811f8cfaa1a741589e3890f0.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">snow</span>
-              <span id="msg">Did you call Ryan?</span>
-            </div>
-          </div>
-        </div>
-        <div class="chats">
-          <div class="chat-banner">
-            <div>
-                <span id="chat-pic"> 
-              <img id="pic" src="https://i.pinimg.com/564x/10/8b/0a/108b0a398d44292efb2fa4b755fdbf33.jpg"/>
-              </span>
-                </div>
-            <div><i class='fas fa-info'></i></div>
-          </div>
-          <div class="sender" onclick="like()">hello! how are you?</div><div id="heart">❤️</div>
-            <div class="receiver">heyy! much better</div>
-          <div class="sender" onclick="like()">Thats great!🥰</div><div id="heart">❤️</div>
-            <div class="receiver">How did the interview go? was it good?</div>
-          <div class="sender" onclick="like()">Yeah. I think I did good🙈</div><div id="heart">❤️</div>
-            <div class="receiver">Wow I'm soo happy for you</div>
-          <div class="sender" onclick="like()">Thanks for always supporting me. Means a lot💖</div><div id="heart">❤️</div>
-            <div class="receiver">your most welcome</div>
-          <div class="user-input"></div>
-          <div class="input-msg">
-            <input type="text" id="send-input" placeholder="type something" onfocus="this.value=''"/>
-            <i onclick="send()" class='far fa-paper-plane'></i>
-          </div>
-        </div>
-      </main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-like Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --white: #fafafa;
+            --grey: #717171;
+            --medium-grey: #dbdbdb;
+            --strong-grey: #545454;
+            --header-color: #fff;
+            --text-color: #262626;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 18px;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        header {
+            position: fixed;
+            width: 100vw;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: row;
+            background-color: var(--header-color);
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        #logo {
+            height: 90%;
+            width: 130px;
+            padding: 5px;
+        }
+
+        input {
+            width: 130px;
+            height: 80%;
+            padding: 5px;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid var(--medium-grey);
+            background-color: var(--white);
+        }
+
+        nav {
+            display: inline-flex;
+        }
+
+        nav i {
+            margin: 5px 10px;
+            font-size: 20px;
+            color: var(--strong-grey);
+        }
+
+        #user {
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+        }
+
+        #user img, #profile-pic img {
+            height: 100%;
+            width: 100%;
+            margin: 2px 10px;
+            border-radius: 50%;
+        }
+
+        main {
+            margin-top: 15vh;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: 80vh;
+            width: 70vw;
+            background-color: var(--white);
+            border: 1px solid var(--medium-grey);
+        }
+
+        .preview {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: 100%;
+            width: 40%;
+            border-right: 1px solid var(--medium-grey);
+        }
+
+        .preview>div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: 70px;
+            width: 100%;
+        }
+
+        .chats {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 80vh;
+            width: 60%;
+            overflow-y: scroll;
+            overflow-x: none;
+        }
+
+        .chat-banner {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        .chat-banner>div {
+            padding: 10px;
+        }
+
+        #user-name {
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 400;
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        #user-name i {
+            font-size: 1em;
+            padding-left: 5px;
+        }
+
+        #pic-div, #pic, #chat-pic {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        #pic {
+            margin-left: 0.5em;
+        }
+
+        #chat-pic {
+            height: 20px;
+            width: 20px;
+        }
+
+        #chat-username {
+            padding: 10px;
+            margin-left: 0.5em;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-username>span {
+            height: 50%;
+            width: auto;
+        }
+
+        #name {
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        #msg {
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .sender, .receiver, .user-input {
+            margin: 0.8em;
+            padding: 10px;
+            height: auto;
+            width: auto;
+            max-width: 140px;
+            border-radius: 20px;
+            border: 1px solid var(--medium-grey);
+            transition: all .2s ease;
+        }
+
+        .sender:hover {
+            background-color: pink;
+            cursor: pointer;
+        }
+
+        .receiver, .user-input {
+            margin-left: 22vw;
+            background-color: var(--medium-grey);
+        }
+
+        .user-input {
+            display: none;
+        }
+
+        #heart {
+            height: 30px;
+            width: 30px;
+            margin-top: -1.5em;
+            margin-left: 1em;
+            visibility: hidden;
+        }
+
+        .input-msg {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            height: 50px;
+            width: 100%;
+            padding-top: 10px;
+            border-top: 1px solid var(--medium-grey);
+        }
+
+        .input-msg i {
+            color: var(--grey);
+            padding: 10px;
+            height: 30px;
+            font-size: 1.5em;
+        }
+
+        #send-input {
+            height: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--grey);
+            width: 80%;
+        }
+
+        @media screen and (min-width: 900px) {
+            .receiver, .user-input {
+                margin-left: 28vw;
+            }
+
+            .sender, .receiver, .user-input {
+                min-width: 140px;
+                width: auto;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            main {
+                height: 100vh;
+                width: 100vw;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            main {
+                height: 100vh;
+                width: 100vw;
+            }
+
+            .preview {
+                display: none;
+            }
+
+            .chats {
+                width: 100%;
+            }
+
+            .receiver, .user-input {
+                margin-left: 70vw;
+            }
+        }
+    </style>
+</head>
+<body>
     <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png" id="logo">
-         <input type="text" placeholder="search"/>    
-         <nav>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png" id="logo">
+        <input type="text" placeholder="search"/>
+        <nav>
             <i class='fas fa-home'></i>
             <i class='far fa-paper-plane'></i>
             <i class='far fa-compass'></i>
@@ -106,86 +293,28 @@
             </div>
         </nav>
     </header>
-      <main>
+
+    <main>
         <div class="preview">
-          <div id="user-name">__fibo_freak <i class='fas fa-angle-down'></i></div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/564x/af/d1/12/afd1126225d818c7c5058e11b4b260c3.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">chloe</span>
-              <span id="msg">I picked up some kambucha..</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/77/41/89/7741893db63e83fdc1d2b4437f63c68b.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">kenzo</span>
-              <span id="msg">call me when your free</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/c3/ea/10/c3ea105f7fb929fe865b37357fab0084.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">nikita</span>
-              <span id="msg">hey did you message your..</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/6f/0f/92/6f0f921e55c5cfb20e9b6e1c00d88c0e.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">betty_spaghetti</span>
-              <span id="msg">Let's go out this weekend!</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/fb/46/ef/fb46ef3c690f10321ebe6f85df9ea93f.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">nunchuck</span>
-              <span id="msg">I just finished watching peak..</span>
-            </div>
-          </div>
-          <div>
-            <span id="pic-div">
-              <img id="pic" src="https://i.pinimg.com/474x/1b/d5/c1/1bd5c166811f8cfaa1a741589e3890f0.jpg">
-            </span>
-            <div id="chat-username">
-              <span id="name">snow</span>
-              <span id="msg">Did you call Ryan?</span>
-            </div>
-          </div>
-        </div>
-        <div class="chats">
-          <div class="chat-banner">
+            <div id="user-name">__fibo_freak <i class='fas fa-angle-down'></i></div>
             <div>
-                <span id="chat-pic"> 
-              <img id="pic" src="https://i.pinimg.com/564x/10/8b/0a/108b0a398d44292efb2fa4b755fdbf33.jpg"/>
-              </span>
+                <span id="pic-div">
+                    <img id="pic" src="https://i.pinimg.com/564x/af/d1/12/afd1126225d818c7c5058e11b4b260c3.jpg">
+                </span>
+                <div id="chat-username">
+                    <span id="name">chloe</span>
+                    <span id="msg">I picked up some kambucha..</span>
                 </div>
-            <div><i class='fas fa-info'></i></div>
-          </div>
-          <div class="sender" onclick="like()">hello! how are you?</div><div id="heart">❤️</div>
-            <div class="receiver">heyy! much better</div>
-          <div class="sender" onclick="like()">Thats great!🥰</div><div id="heart">❤️</div>
-            <div class="receiver">How did the interview go? was it good?</div>
-          <div class="sender" onclick="like()">Yeah. I think I did good🙈</div><div id="heart">❤️</div>
-            <div class="receiver">Wow I'm soo happy for you</div>
-          <div class="sender" onclick="like()">Thanks for always supporting me. Means a lot💖</div><div id="heart">❤️</div>
-            <div class="receiver">your most welcome</div>
-          <div class="user-input"></div>
-          <div class="input-msg">
-            <input type="text" id="send-input" placeholder="type something" onfocus="this.value=''"/>
-            <i onclick="send()" class='far fa-paper-plane'></i>
-          </div>
-        </div>
-      </main>
-    
+            </div>
+            <div>
+                <span id="pic-div">
+                    <img id="pic" src="https://i.pinimg.com/474x/77/41/89/7741893db63e83fdc1d2b4437f63c68b.jpg">
+                </span>
+                <div id="chat-username">
+                    <span id="name">kenzo</span>
+                    <span id="msg">call me when your free</span>
+                </div>
+            </div>
+            <div>
+                <span id="pic-div">
+                    <img id="pic" src="https://i.pinimg.com/474x/c3/ea/10/c3ea105f7fb929fe865b37357
