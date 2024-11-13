@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url('bg.avif'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    overflow: hidden; 
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-box {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 350px;
+    text-align: center;
+    margin-bottom: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-family: 'Cookie', cursive;
+    font-size: 2.5rem;
+    color: #262626;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #3897f0, #4a8cff);
+}
+
+button.fb-login {
+    background: linear-gradient(45deg, #4e68b3, #4267b2);
+}
+
+.forgot-password, .toggle-box a {
+    color: #00376b;
+    text-decoration: none;
+    font-size: 12px;
+    display: block;
+    margin-top: 10px;
+}
+
+.toggle-box {
+    font-size: 14px;
+    color: #262626;
+}
+
+input:invalid {
+    border: 2px solid red;
+}
+
+input:valid {
+    border: 2px solid green;
+}
+
+/* Add focus styles for inputs */
+input:focus {
+    border-color: #3897f0;
+    outline: none;
+}
+
+
+.terms {
+    font-size: 10px;
+    color: #8e8e8e;
+    margin-top: 10px;
+}

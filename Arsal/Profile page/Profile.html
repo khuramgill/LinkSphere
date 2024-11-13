@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Instagram Clone // Profile Page</title>
+    <link rel="stylesheet" href="main.css"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+  <style>
+    /* Dropdown Menu */
+    .dropdown-menu {
+      display: none; 
+      position: absolute;
+      bottom: -160px;
+      left:1050px;
+      transform: translate(-50%);
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      overflow: hidden;
+      /* transition: opacity 0.3s ease, transform 0.3s ease; */
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 20;
+      width: 80%; 
+      max-width: 300px; 
+    }
+    
+    .dropdown-menu.active {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1); /* Smooth transition effect */
+      transform: translateY(0);
+    }
+    
+    /* Dropdown Items */
+    .dropdown-item {
+      background: none;
+      border: none;
+      color: rgb(0, 0, 0);
+      padding: 15px 0;
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: 400;
+      transition: background-color 0.2s;
+      font-size: 16px;
+    }
+    
+    .dropdown-item:not(:last-child) {
+      border-bottom: 4px solid #000000b6; 
+    }
+    
+    .dropdown-item:hover {
+      background-color:#1f0000; 
+      color: white;
+    }
+    
+    /* Logout Item Styling */
+    .dropdown-item.logout {
+      color: red;
+      font-weight: bold;
+    }
+    
+    .dropdown-item.logout:hover {
+      background-color: #000000; /* Light red on hover */
+    }
+    </style>
+  </head>
+
+
+  <body>
+   
+    <div class="container-fluid" style="background-color: black;">
+      <!-- Top Bar -->
+      <section class="top-bar">
+        <div class="top-bar__title">
+          <h1 class="top-bar__title__text" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">instagram</h1>
+          <img
+            class="top-bar__title__verified-icon"
+            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/kisspng-social-media-instagram-verified-badge-symbol-compu-5b1eedb5aba638.1612204615287535897031.jpg"
+            alt="verified-icon"
+          />
+        </div>
+               <!-- Settings Button with Dropdown -->
+               <button class="top-bar__menu-btn" onclick="toggleDropdown()">
+                <i class="material-icons">settings</i>
+              </button>
+              <!-- Dropdown Menu -->
+              <div class="dropdown-menu" id="dropdownMenu">
+                <button class="dropdown-item logout" onclick="logout()">Logout</button>
+                <button class="dropdown-item " onclick="closeDropdown()">Cancel</button>
+              </div>
+            </section>
+      </section>
+
+      
+      <!-- Profile Stats -->
+      <section class="stats">
+        <div
+          class="stats__img-holder"
+          style="background-image: url('Images/arsal.png')"
+          onclick="changeProfileImage()"
+        ></div>
+        <input
+          type="file"
+          id="profileImageInput"
+          style="display: none"
+          onchange="updateProfileImage(event)"
+
+        />
+
+        <div class="stats__data" style="color: white;">
+          <div class="stats__data__point">
+            <div class="stats__data__point__value" style="margin-left: 14px;">6,126</div>
+            <div class="stats__data__point__description">Posts</div>
+          </div>
+          <div class="stats__data__point">
+            <div class="stats__data__point__value" style="margin-left: 3px;">317 M</div>
+            <div class="stats__data__point__description">Followers</div>
+          </div>
+          <div class="stats__data__point">
+            <div class="stats__data__point__value" style="margin-right: 18px;">225</div>
+            <div class="stats__data__point__description">Following</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Description -->
+      <section class="description" style="color: white;">
+        <h2>itx.Gujjar</h2>
+        <p>Bringing you closer to the people and things you love. ❤️</p>
+        <p>
+          This is Arsal Noor<br />20 years old<br />Undergraduate in BS COMPUTER
+          SCIENCE<br />at UET LAHORE. ❤️
+        </p>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="actions">
+      <button class="actions__btn" style="background-color: rgb(0, 0, 0);color: white;" onclick="window.location.href='Edit-profile.html'">Edit Profile</button>
+      </section>
+
+ 
+
+   
+      <!-- <section class="grid">
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1548032885-b5e38734688a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1501426026826-31c667bdf23d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1507041957456-9c397ce39c97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1519821172144-4f87d85de2a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1509233725247-49e657c54213?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1520454974749-611b7248ffdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1504681869696-d977211a5f4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1522083165195-3424ed129620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1523374228107-6e44bd2b524e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1516893842880-5d8aada7ac05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1539108826694-1297410cdda9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1529690982439-df5e60eb5a3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1491056792553-4704d261e3ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1562138888-3d0a63b21dcf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1568641134257-ab85695f67e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1545385095-f5a14a9160d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1547462713-a208daf9d997?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+        <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1522586217274-9096ee38a805?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a> 
+</section> -->
+
+
+
+
+
+
+  <!-- Tabs of Posts and Reels -->
+<section class="tabs">
+  <button class="tabs__btn tabs__btn--active" id="postsTab" onclick="showSection('posts')">
+    <img
+      class="tabs__btn__icon"
+      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/grid-icon.png"
+      alt="grid icon"
+    />
+  </button>
+  <button class="tabs__btn" id="reelsTab" onclick="showSection('reels')">
+    <img
+      class="tabs__btn__icon"
+      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/igtv-icon.png"
+      alt="igtv icon"
+    />
+  </button>
+</section>
+
+<!-- Posts Section -->
+<section class="grid" id="postsSection">
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1548032885-b5e38734688a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1504681869696-d977211a5f4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1522083165195-3424ed129620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1523374228107-6e44bd2b524e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1516893842880-5d8aada7ac05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1539108826694-1297410cdda9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1529690982439-df5e60eb5a3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1491056792553-4704d261e3ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  
+</section>
+
+<!-- Reels Section -->
+<section class="grid" id="reelsSection" style="display: none;">
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1522586217274-9096ee38a805?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1547462713-a208daf9d997?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1562138888-3d0a63b21dcf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1568641134257-ab85695f67e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1545385095-f5a14a9160d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1547462713-a208daf9d997?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a>
+  <a href="" class="grid__photo" style="background-image: url('https://images.unsplash.com/photo-1522586217274-9096ee38a805?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');"></a> 
+</section>
+
+
+<script src = "script.js"></script>
+
+
+  </body>
+
+</html>

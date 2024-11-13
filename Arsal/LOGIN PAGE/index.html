@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <link rel="stylesheet" href="myStyle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-box">
+            <h1 class="logo">Instagram</h1>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <form id="loginFormElement">
+                    <input type="text" placeholder="Username" id="loginUsername" required>
+                    <div class="password-wrapper">
+                        <input type="password" placeholder="Password" id="loginPassword" required>
+                        <span class="eye-icon" onclick="togglePasswordVisibility('loginPassword')">&#128065;</span>
+                    </div>
+                    <button type="submit">Log In</button>
+                    <p>OR</p>
+                    <button type="button" class="fb-login">Log in with Facebook</button>
+                </form>
+                <div class="toggle-box">
+                    <p>Don't have an account? <a href="javascript:void(0);" onclick="toggleForm()">Sign up</a></p>
+                </div>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form" style="display: none;">
+                <form id="signupFormElement">
+                    <input type="email" placeholder="Mobile Number or Email" id="signupEmail" required>
+                    <input type="text" placeholder="Full Name" id="signupFullName" required>
+                    <input type="text" placeholder="Username" id="signupUsername" required>
+                    <div class="password-wrapper">
+                        <input type="password" placeholder="Password" id="signupPassword" required>
+                        <span class="eye-icon" onclick="togglePasswordVisibility('signupPassword')">&#128065;</span>
+                    </div>
+                    <div class="password-wrapper">
+                        <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
+                        <span class="eye-icon" onclick="togglePasswordVisibility('confirmPassword')">&#128065;</span>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <p class="terms">By signing up, you agree to our Terms, Data Policy, and Cookies Policy.</p>
+                </form>
+                <div class="toggle-box">
+                    <p>Have an account? <a href="javascript:void(0);" onclick="toggleForm()">Log in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
