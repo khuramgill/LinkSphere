@@ -6,7 +6,7 @@ function like() {
   });
 }
 
-// Send user input as a new message in chat
+// Send user input 
 function send() {
   var usermsg = document.getElementById("send-input").value;
   if (usermsg.trim() !== "") { // Check if input is not empty
