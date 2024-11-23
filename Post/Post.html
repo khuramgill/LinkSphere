@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        
+        .preview-container {
+            min-height: 300px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .preview-container.dragover {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+
+        #imagePreview {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Create New Post</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="postForm" enctype="multipart/form-data">
+                            <!-- Image Upload -->
+                            <div class="mb-3">
+                                <div class="preview-container" id="dropZone">
+                                    <img id="imagePreview" class="image-preview">
+                                    <div id="uploadPrompt" class="text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-image mb-3" viewBox="0 0 16 16">
+                                            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                        </svg>
+                                        <p class="mb-0">Drag and drop your image here</p>
+                                        <p class="text-muted">or</p>
+                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
+                                            Select from computer
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="file" id="imageInput" class="d-none" accept="image/*">
+                            </div>
+
+                            <!-- Caption -->
+                            <div class="mb-3">
+                                <label for="caption" class="form-label">Caption</label>
+                                <textarea class="form-control" id="caption" rows="3" placeholder="Write a caption..."></textarea>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" placeholder="Add location">
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="mb-3">
+                                <label for="tags" class="form-label">Tags</label>
+                                <input type="text" class="form-control" id="tags" placeholder="Add tags (separated by spaces) #nature #photography">
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary w-100">Share Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropZone = document.getElementById('dropZone');
+            const imageInput = document.getElementById('imageInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const uploadPrompt = document.getElementById('uploadPrompt');
+            const postForm = document.getElementById('postForm');
+
+            // Handle drag and drop
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    handleImageUpload(file);
+                }
+            });
+
+            // Handle file input change
+            imageInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    handleImageUpload(file);
+                }
+            });
+
+            // Preview image
+            function handleImageUpload(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadPrompt.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Handle form submission
+            postForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData();
+                formData.append('image', imageInput.files[0]);
+                formData.append('caption', document.getElementById('caption').value);
+                formData.append('location', document.getElementById('location').value);
+                formData.append('tags', document.getElementById('tags').value);
+
+                try {
+                    // Replace with your actual API endpoint
+                    const response = await fetch('/api/posts', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        alert('Post created successfully!');
+                        postForm.reset();
+                        imagePreview.style.display = 'none';
+                        uploadPrompt.style.display = 'block';
+                    } else {
+                        throw new Error('Failed to create post');
+                    }
+                } catch (error) {
+                    alert('Error creating post: ' + error.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
